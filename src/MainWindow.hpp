@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Simulation.hpp"
 #include <QMainWindow>
 #include <QLabel>
 #include <QPushButton>
@@ -38,6 +39,7 @@ private slots:
     void createCustomersUI();
     void createStatusUI();
     
+    Simulation* simulation;
     QTimer *updateTimer;
     
     QWidget *centralWidget;

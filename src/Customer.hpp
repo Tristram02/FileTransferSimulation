@@ -10,6 +10,7 @@ public:
     ~Customer();
 
     void addFile(int size);
+    void addFile(File* file);
     File* getNextFile();
     void fileProcessed(File* file);
 
@@ -29,6 +30,7 @@ public:
 
 private:
     int id;
+    int fileId;
     std::vector<File*> pendingFiles;
     std::vector<File*> processedFiles;
     double totalWaitTime;

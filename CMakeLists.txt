@@ -13,6 +13,7 @@ set(PROJECT_SOURCES
     src/File.cpp
     src/Customer.cpp
     src/Directory.cpp
+    src/Simulation.cpp
 )
 
 add_executable(FileTransferSimulation ${PROJECT_SOURCES})
