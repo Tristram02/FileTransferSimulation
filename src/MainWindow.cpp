@@ -86,7 +86,7 @@ void MainWindow::createControlsUI()
     
     customersLabel = new QLabel("Customers:");
     customersSpinBox = new QSpinBox();
-    customersSpinBox->setRange(1, 20);
+    customersSpinBox->setRange(1, 1000);
     customersSpinBox->setValue(10);
     
     connect(startButton, &QPushButton::clicked, this, &MainWindow::startSimulation);

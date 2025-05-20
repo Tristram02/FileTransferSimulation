@@ -9,12 +9,12 @@ Customer::Customer(int id)
 
 Customer::~Customer()
 {
-    for (File* file : pendingFiles) {
+    for (auto& file : pendingFiles) {
         delete file;
     }
     pendingFiles.clear();
     
-    for (File* file : processedFiles) {
+    for (auto& file : processedFiles) {
         delete file;
     }
     processedFiles.clear();
@@ -22,13 +22,18 @@ Customer::~Customer()
 
 void Customer::addFile(int size)
 {
-    std::cout << "Id: " << id << " | fileID: " << fileId << std::endl;
     pendingFiles.push_back(new File(++fileId, size));
+    std::sort(pendingFiles.begin(), pendingFiles.end(), [](const File* a, const File* b) {
+        return a->getSize() < b->getSize();
+    });
 }
 
 void Customer::addFile(File* file)
 {
     pendingFiles.push_back(file);
+    std::sort(pendingFiles.begin(), pendingFiles.end(), [](const File* a, const File* b) {
+        return a->getSize() < b->getSize();
+    });
 }
 
 File* Customer::getNextFile()
@@ -37,21 +42,9 @@ File* Customer::getNextFile()
         return nullptr;
     }
     
-    auto highestPriorityIter = std::max_element(
-        pendingFiles.begin(), 
-        pendingFiles.end(),
-        [](const File* a, const File* b) {
-            return a->getPriority() < b->getPriority();
-        }
-    );
-    
-    if (highestPriorityIter != pendingFiles.end()) {
-        auto nextFile = *highestPriorityIter;
-        pendingFiles.erase(highestPriorityIter);
-        return nextFile;
-    }
-    
-    return nullptr;
+    auto nextFile = pendingFiles.front();
+    pendingFiles.erase(pendingFiles.begin());
+    return nextFile;
 }
 
 void Customer::fileProcessed(File* file)
