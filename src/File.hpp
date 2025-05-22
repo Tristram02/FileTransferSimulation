@@ -11,6 +11,7 @@ public:
     double getWaitTime() const;
     bool isProcessed() const;
 
+    void setId(int id);
     void setProcessed(bool processed);
     void updateWaitTime(double deltaTime);
     void updatePriority(int customerCount);

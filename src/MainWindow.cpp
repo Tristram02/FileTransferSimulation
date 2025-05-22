@@ -135,12 +135,10 @@ void MainWindow::createStatusUI()
     
     timeElapsedLabel = new QLabel("Time Elapsed: 0 secs");
     filesProcessedLabel = new QLabel("Files Processed: 0");
-    averageWaitTimeLabel = new QLabel("Average Wait Time: 0 secs");
     simulationStatusLabel = new QLabel("Status: Ready");
     
     statusHLayout->addWidget(timeElapsedLabel);
     statusHLayout->addWidget(filesProcessedLabel);
-    statusHLayout->addWidget(averageWaitTimeLabel);
     statusHLayout->addWidget(simulationStatusLabel);
     
     statusLayout->addLayout(statusHLayout);
@@ -232,10 +230,6 @@ void MainWindow::updateGUI()
 
     timeElapsedLabel->setText(QString("Time Elapsed: %1 secs").arg(simulation->getElapsedTime()));
     filesProcessedLabel->setText(QString("Files Processed: %1").arg(simulation->getProcessedFilesCount()));
-    averageWaitTimeLabel->setText(QString("Average Wait Time: %1 secs").arg(
-        simulation->getProcessedFilesCount() > 0 ? 
-        QString::number(simulation->getTotalWaitTime() / simulation->getProcessedFilesCount(), 'f', 2) : 
-        "0.00"));
 
     int currentRow = customersList->currentRow();
     if (currentRow >= 0 && currentRow < simulation->getCustomersCount()) {
@@ -266,7 +260,6 @@ void MainWindow::showCustomerDetails(int customerIndex)
     ss << "Pending Files: " << customer.getPendingFilesCount() << "\n";
     ss << "Processed Files: " << customer.getProcessedFilesCount() << "\n";
     ss << "Total Files: " << customer.getTotalFilesCount() << "\n";
-    ss << "Average Priority: " << customer.getAveragePriority() << "\n";
     ss << "Wait Time: " << customer.getTotalWaitTime() << " secs\n\n";
     
     ss << "Pending Files:\n";

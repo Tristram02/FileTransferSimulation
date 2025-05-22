@@ -30,6 +30,11 @@ bool File::isProcessed() const
     return processed;
 }
 
+void File::setId(int id)
+{
+    this->id = id;
+}
+
 void File::setProcessed(bool processed)
 {
     this->processed = processed;

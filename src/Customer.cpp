@@ -22,18 +22,20 @@ Customer::~Customer()
 
 void Customer::addFile(int size)
 {
-    pendingFiles.push_back(new File(++fileId, size));
+    pendingFiles.push_back(new File(0, size));
     std::sort(pendingFiles.begin(), pendingFiles.end(), [](const File* a, const File* b) {
         return a->getSize() < b->getSize();
     });
+    int newId = 1;
+    for (auto& file : pendingFiles) {
+        file->setId(newId++);
+    }
+    fileId = static_cast<int>(pendingFiles.size());
 }
 
 void Customer::addFile(File* file)
 {
-    pendingFiles.push_back(file);
-    std::sort(pendingFiles.begin(), pendingFiles.end(), [](const File* a, const File* b) {
-        return a->getSize() < b->getSize();
-    });
+    pendingFiles.insert(pendingFiles.begin(), file);
 }
 
 File* Customer::getNextFile()

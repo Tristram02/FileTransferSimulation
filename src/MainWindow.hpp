@@ -70,6 +70,5 @@ private slots:
     QVBoxLayout *statusLayout;
     QLabel *timeElapsedLabel;
     QLabel *filesProcessedLabel;
-    QLabel *averageWaitTimeLabel;
     QLabel *simulationStatusLabel;
 };
